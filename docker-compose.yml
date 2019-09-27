@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+      app:
+         build: 
+           context: . 
+         image: idas-django:v1.0
+         container_name: idas-web
+         restart: unless-stopped
+         ports:
+            - "8000:8000"
+         volumes:
+            - "./ltms_project1/ltms_project1/settings.py:/app/ltms_project1/ltms_project1/settings.py"
+        #  depends_on: 
+        #     - db
+        
+         command: " bash -c 'python ltms_project1/manage.py makemigrations &&
+                             python ltms_project1/manage.py migrate &&
+                             python ltms_project1/manage.py runserver 0.0.0.0:8000'"
+      
+      # db:
+      #   image: postgres
+      #   volumes:
+      #     - pgdata:/var/lib/postgres/data/
+      #   ports:
+#       #     - "5432:5432"
+# volumes:
+#   pgdata:
+#   webapp:

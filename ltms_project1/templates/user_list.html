@@ -1,0 +1,38 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% block title %}User List{% endblock %}
+{% block main %}
+  {% if user.is_authenticated %}
+    <div class="container-fluid mt-4">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">User List</div>
+            <div class="card-body">
+              <table class="table table-hover" id="UserList">
+                <thead class="thead-dark" style="text-align: center">
+                  <tr>
+                    <th>User</th>
+                    <th>Is Active</th>
+                    <th>Roles</th>
+                  </tr>
+                </thead>
+                {% for user in user_list %}
+                <tbody style="text-align: center">
+                  <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.roles }}</td>
+                  </tr>
+                </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <h4 style="text-align: center">You are not logged in!</h4>
+  {% endif %}
+{% endblock %}

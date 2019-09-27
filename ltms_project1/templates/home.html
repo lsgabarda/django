@@ -1,0 +1,37 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  {% if user.is_authenticated %}
+    <div class="container-fluid">
+      <div class="row">
+        <div style="width:10%"></div>
+        <nav class="d-none d-sm-block navbar-dark bg-dark position-fixed" style="min-height: 100vh; width:10%">
+          <ul class="navbar-nav flex-column">
+            <li class="sidebar-item nav-item">
+              <a class="nav-link ml-3" href="#"><i class="fa fa-fw fa-desktop"></i>Permissions</a>
+            </li>
+            <li class="sidebar-item nav-item">
+              <a class="nav-link ml-3" href="#"><i class="fa fa-fw fa-desktop"></i>Roles</a>
+            </li>
+            <li class="sidebar-item nav-item">
+              <a class="nav-link ml-3" href="{% url 'user_list' %}"><i class="fa fa-fw fa-desktop"></i>Users</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  {% else %}
+  <div class="mt-4"><h4 style="text-align: center">Welcome User!</h4></div>
+  {% endif %}
+{% endblock %}
+
+<!-- {% if user.is_authenticated %}
+<ul class="sidebar-nav">
+  <li><a href="">Permissions</a></li>
+  <li><a href="">Roles</a></li>    
+  <li><a href="{% url 'user_list' %}">Users</a></li>   
+</ul>
+{% else %}
+<h4 style="text-align: center">Welcome User!</h4>
+{% endif %} -->

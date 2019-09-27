@@ -1,0 +1,43 @@
+body {
+  /* background-image: url('{{ STATIC_URL }}im/g/Quepal.jpg'); */
+  /* background-image: url('/static/img/bg-4.jpg'); */
+  background-image: url('/static/img/slider4.jpg');
+  background-repeat: inherit;
+  background-size: 100%;
+  background-position: top;
+  background-attachment: fixed;
+  /* background-color: antiquewhite;  */
+  margin-top: 5%;
+  opacity: 0.85;
+}
+
+.card {
+  background: none;
+  color: azure;
+}
+
+.logo {
+  /* width: 340px; */
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 0px;
+  padding: 15px;
+  text-align: center;
+}
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
