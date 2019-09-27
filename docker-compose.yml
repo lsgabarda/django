@@ -12,19 +12,32 @@ services:
             - "8000:8000"
          volumes:
             - "./ltms_project1/ltms_project1/settings.py:/app/ltms_project1/ltms_project1/settings.py"
-        #  depends_on: 
-        #     - db
+         depends_on: 
+            - db
+            - webserver
         
          command: " bash -c 'python ltms_project1/manage.py makemigrations &&
                              python ltms_project1/manage.py migrate &&
                              python ltms_project1/manage.py runserver 0.0.0.0:8000'"
       
-      # db:
-      #   image: postgres
-      #   volumes:
-      #     - pgdata:/var/lib/postgres/data/
-      #   ports:
-#       #     - "5432:5432"
-# volumes:
-#   pgdata:
-#   webapp:
+      db:
+        image: postgres:11.5
+        container_name: idas-pg
+        restart: always
+        environment:
+          POSTGRES_PASSWORD: secret
+        ports:
+          - "5432:5432"
+        volumes:
+          - pgdata:/var/lib/postgres/data/
+        
+      webserver:
+         image: httpd:2
+         container_name: idas-webserver
+         restart: always
+         ports:
+            - "80:80"
+
+
+volumes:
+  pgdata:
