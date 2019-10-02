@@ -4,7 +4,7 @@ services:
 
       app:
          build: 
-           context: . 
+           context: ./ltms_project1
          image: idas-django:v1.0
          container_name: idas-web
          restart: unless-stopped
@@ -14,30 +14,30 @@ services:
             - "./ltms_project1/ltms_project1/settings.py:/app/ltms_project1/ltms_project1/settings.py"
          depends_on: 
             - db
-            - webserver
+            - web
         
-         command: " bash -c 'python ltms_project1/manage.py makemigrations &&
-                             python ltms_project1/manage.py migrate &&
-                             python ltms_project1/manage.py runserver 0.0.0.0:8000'"
+         command: " bash -c 'python manage.py makemigrations &&
+                             python manage.py migrate &&
+                             gunicorn ltms_project1.wsgi -b 0.0.0.0:8000'"
       
       db:
-        image: postgres:11.5
-        container_name: idas-pg
-        restart: always
-        environment:
-          POSTGRES_PASSWORD: secret
-        ports:
-          - "5432:5432"
+        image: postgres
+        container_name: idas-db
         volumes:
           - pgdata:/var/lib/postgres/data/
-        
-      webserver:
+        environment:
+          - POSTGRES_PASSWORD=secret
+        ports:
+          - "5432"
+
+      web:
+         # build:
+         #    context: ./apache
          image: httpd:2
-         container_name: idas-webserver
-         restart: always
+         #idas-webserver
+         container_name: idas-ws
          ports:
             - "80:80"
-
-
 volumes:
-  pgdata:
+   pgdata:
+#   webapp:
